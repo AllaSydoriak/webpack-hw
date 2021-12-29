@@ -5,17 +5,25 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "build": "webpack",
-    "dev": "webpack --watch"
+    "build:modern": "cross-env NODE_ENV=production BROWSERSLIST_ENV=modern webpack",
+    "build:legacy": "cross-env NODE_ENV=production BROWSERSLIST_ENV=legacy webpack",
+    "dev": "cross-env NODE_ENV=development BROWSERSLIST_ENV=modern webpack --watch",
+    "lint:editorconfig": "editorconfig-checker"
   },
   "author": "Alla Sydoriak",
   "license": "ISC",
+  "lint-staged": {
+    "/src": "editorconfig-checker",
+    "/src/*.js": "cross-env NODE_ENV=development eslint"
+  },
   "devDependencies": {
     "@babel/core": "^7.16.5",
     "@babel/preset-env": "^7.16.5",
     "@babel/preset-react": "^7.16.5",
     "babel-loader": "^8.2.3",
+    "cross-env": "^7.0.3",
     "css-loader": "^6.5.1",
+    "editorconfig-checker": "^4.0.2",
     "eslint": "^8.5.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.25.3",
@@ -24,6 +32,7 @@
     "eslint-plugin-react-hooks": "^4.3.0",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
+    "lint-staged": "^12.1.4",
     "mini-css-extract-plugin": "^2.4.5",
     "postcss": "^8.4.5",
     "postcss-loader": "^6.2.1",
